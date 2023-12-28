@@ -46,7 +46,7 @@ public class EnterpriseService implements IEnterpriseService {
 
     @Override
     public EnterpriseResponseDto update(EnterpriseRequestDto enterpriseRequestDto) {
-
+        return null;
     }
 
     @Override
@@ -56,7 +56,9 @@ public class EnterpriseService implements IEnterpriseService {
 
 
     private void saveImage(MultipartFile file, String id) {
+        if(file == null) throw new IllegalArgumentException("Image is required");
         String extension = Objects.requireNonNull(file.getOriginalFilename()).split("\\.")[1];
+        if(!extension.equals("png")) throw new IllegalArgumentException("Only png files are allowed");
         String uploadDir = "src/main/resources/static/";
         String fileName = id + "." + extension;
         Path path = Path.of(uploadDir);
@@ -74,6 +76,8 @@ public class EnterpriseService implements IEnterpriseService {
             e.printStackTrace();
         }
     }
+
+
 
 
 }
