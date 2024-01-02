@@ -2,7 +2,10 @@ package com.yc.myrh.services.implementation;
 
 import com.yc.myrh.dto.Enterprise.EnterpriseRequestDto;
 import com.yc.myrh.dto.Enterprise.EnterpriseResponseDto;
+import com.yc.myrh.dto.Enterprise.VerifyRequestDto;
 import com.yc.myrh.entities.Enterprise;
+import com.yc.myrh.exceptions.ResourceNotFoundException;
+import com.yc.myrh.helpers.EmailSender;
 import com.yc.myrh.repositories.EnterpriseRepository;
 import com.yc.myrh.services.IEnterpriseService;
 
@@ -16,18 +19,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class EnterpriseService implements IEnterpriseService {
     private EnterpriseRepository enterpriseRepository;
     private ModelMapper modelMapper;
+    private EmailSender emailSender;
 
     @Override
     @Transactional
     public EnterpriseResponseDto create(EnterpriseRequestDto enterpriseRequestDto) {
         Enterprise enterprise = modelMapper.map(enterpriseRequestDto, Enterprise.class);
+        enterprise.setCode(UUID.randomUUID().toString());
+
         enterpriseRepository.save(enterprise);
+        emailSender.sendEmail(enterprise.getEmail(), "Verification code", "Your verification code is " + enterprise.getCode());
         saveImage(enterpriseRequestDto.getImage(), enterprise.getId());
         return modelMapper.map(enterprise, EnterpriseResponseDto.class);
     }
@@ -52,6 +61,13 @@ public class EnterpriseService implements IEnterpriseService {
     @Override
     public boolean delete(String id) {
         return false;
+    }
+
+    @Override
+    public boolean verify(VerifyRequestDto verifyRequestDto) {
+        Optional<Enterprise> enterprise = enterpriseRepository.findById(verifyRequestDto.getId());
+        if (enterprise.isEmpty()) throw new ResourceNotFoundException ("Enterprise not found");
+        return enterprise.get().getCode().equals(verifyRequestDto.getCode());
     }
 
 

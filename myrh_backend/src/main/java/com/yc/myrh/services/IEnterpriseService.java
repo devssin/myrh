@@ -2,6 +2,7 @@ package com.yc.myrh.services;
 
 import com.yc.myrh.dto.Enterprise.EnterpriseRequestDto;
 import com.yc.myrh.dto.Enterprise.EnterpriseResponseDto;
+import com.yc.myrh.dto.Enterprise.VerifyRequestDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface IEnterpriseService {
     EnterpriseResponseDto getById(String id);
     EnterpriseResponseDto update(EnterpriseRequestDto enterpriseRequestDto);
     boolean delete(String id);
+    boolean verify(VerifyRequestDto verifyRequestDto);
 }
