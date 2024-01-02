@@ -1,0 +1,21 @@
+<div class="containner pt-40  bg-gray-100 min-h-screen">
+    
+    <div class="max-w-lg mx-auto  shadow-lg bg-white rounded-md px-6 py-4 overflow-hidden">
+        
+        <a href="/" class="text-center p-10">
+            <h2 class="font-black text-xl">My<span class="font-poppins text-primary">Rh</span></h2>
+        </a>
+        <h2 class="text-center text-2xl font-semibold text-gray-700 mb-2">Enterprise Verify</h2>
+
+        <form action="" method="post" (ngSubmit)="verify()" >
+                <div class="">
+                    <label for="email" class="text-sm text-gray-600 block ">Verification Code</label>
+                    <input type="text" name="verification" placeholder="Enter verification code" class="block w-full mt-1 text-sm  border  rounded-md  focus:ring-0" [(ngModel)]="verifyRequest.code">
+                </div>
+            
+            <div class="pt-4">
+                <button type="input" class="block w-full text-center bg-primary py-2 text-white  hover:bg-sec   transition duration-300  rounded"> Register</button>
+            </div>
+        </form>
+    </div>
+</div>
