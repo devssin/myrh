@@ -1,0 +1,61 @@
+<div class="grid grid-cols-5 max-h-screen bg-gray-100">
+    <app-sidebar [enterpriseId]="enterpriseId"></app-sidebar>
+    <div class="col-span-4 min-h-screen overflow-y-auto px-4">
+      <div class="my-5"></div>
+      <div class="flex justify-between items-center p-4">
+        <h4 class="text-gray-500 text-lg">Candidatures</h4>
+        <a
+          [routerLink]="['/add-offer']"
+          class="block px-4 cursor-pointer text-center bg-primary py-2 text-secondary text-lg font-semibold hover:bg-secondary hover:text-primary transition duration-300 rounded"
+          >Add Offer</a
+        >
+      </div>
+  
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead
+            class="text-xs text-secondary uppercase bg-primary dark:bg-gray-700 dark:text-gray-400"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3">Offer</th>
+              <th scope="col" class="px-6 py-3">fullname </th>
+              <th scope="col" class="px-6 py-3">email</th>
+              <th scope="col" class="px-6 py-3">cv</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              *ngFor="let candidature of candidatures"
+            >
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                {{ candidature.offer.title }}
+              </th>
+              <td class="px-6 py-4">
+                {{ candidature.fullname }}
+              </td>
+              <td class="px-6 py-4">{{ candidature.email }}</td>
+              <td class="px-6 py-4">
+                <div
+                  class="text-xs text-center px-2 py-1 rounded-lg uppercase font-semibold tracking-wide"
+                  
+                >
+                    <a [href]="'http://localhost:8080/cv/'+candidature.id+'.pdf'" target="_blank">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      
+  
+  
+    </div>
+  </div>
+  

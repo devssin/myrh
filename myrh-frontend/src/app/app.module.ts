@@ -9,6 +9,11 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './inc/header/header.component';
 import { FooterComponent } from './inc/footer/footer.component';
 import { FormsModule } from '@angular/forms';
+import { SidebarComponent } from './inc/sidebar/sidebar.component';
+import { DashboardComponent } from './enterprise/dashboard/dashboard.component';
+import { AddOfferComponent } from './enterprise/add-offer/add-offer.component';
+import { PostuleComponent } from './postule/postule.component';
+import { CandidaturesComponent } from './enterprise/candidatures/candidatures.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,12 @@ import { FormsModule } from '@angular/forms';
     VerifieComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SidebarComponent,
+    DashboardComponent,
+    AddOfferComponent,
+    PostuleComponent,
+    CandidaturesComponent
   ],
   imports: [
     BrowserModule,

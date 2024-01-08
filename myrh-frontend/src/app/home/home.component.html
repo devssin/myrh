@@ -1,6 +1,38 @@
 <app-header></app-header>
-<div class="" >
+<div class="bg-gray-200 px-20 py-10">
+  <h1>List of offers</h1>
 
+  <div class="grid grid-cols-3 gap-4 mt-5">
+    <div
+      class="w-full max-w-sm y-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      *ngFor="let offer of offers"
+    >
+      <div class="flex flex-col items-center py-3">
+        <img
+          class="w-24 h-24 mb-3 rounded-full shadow-lg"
+          src="http://localhost:8080/images/{{ offer.enterprise.id }}.png"
+          alt="Bonnie image"
+        />
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+          {{ offer.title }}
+          <span class="text-sm text-gray-500 dark:text-gray-400">{{
+            offer.enterprise.name
+          }}</span>
+        </h5>
+
+        <p>Description : {{ offer.description }}</p>
+        <p>Profile: {{ offer.profile }}</p>
+        <p>Salare: {{ offer.salary }}</p>
+
+        <div class="flex mt-4 md:mt-6">
+          <a
+            [routerLink]="['/postule/' + offer.id]"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Postuler
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<app-footer></app-footer>
-
