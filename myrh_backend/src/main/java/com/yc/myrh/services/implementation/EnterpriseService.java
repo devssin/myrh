@@ -11,6 +11,7 @@ import com.yc.myrh.services.IEnterpriseService;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,9 +26,11 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class EnterpriseService implements IEnterpriseService {
+
     private EnterpriseRepository enterpriseRepository;
     private ModelMapper modelMapper;
     private EmailSender emailSender;
+
 
     @Override
     @Transactional
@@ -75,8 +78,9 @@ public class EnterpriseService implements IEnterpriseService {
         if(file == null) throw new IllegalArgumentException("Image is required");
         String extension = Objects.requireNonNull(file.getOriginalFilename()).split("\\.")[1];
         if(!extension.equals("png")) throw new IllegalArgumentException("Only png files are allowed");
-        String uploadDir = "src/main/resources/static/";
+
         String fileName = id + "." + extension;
+        String uploadDir = "src/main/resources/images/";
         Path path = Path.of(uploadDir);
         if(!Files.exists(path)){
             try {

@@ -1,17 +1,24 @@
 package com.yc.myrh.entities;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
 public class Candidature {
-    @EmbeddedId
-    private CandidatureId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+    private String fullname;
+    private String email;
+    private String phone;
     private String coverLetter;
+
+    @ManyToOne
+    @JoinColumn(name = "offer_id")
+    private Offer offer;
+
+
 
 
 }

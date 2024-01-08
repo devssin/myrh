@@ -11,6 +11,8 @@ import com.yc.myrh.repositories.OfferRepository;
 import com.yc.myrh.services.IOfferService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +35,18 @@ public class OfferService implements IOfferService {
         offer.setStatus(Status.ONHOLD);
         offer = offerRepository.save(offer);
         return modelMapper.map(offer, OfferResponseDto.class);
+    }
+
+    @Override
+    public Page<OfferResponseDto> getAllOffers(Pageable pageable) {
+        Page<Offer> offers = offerRepository.findAll(pageable);
+        return offers.map(offer -> modelMapper.map(offer, OfferResponseDto.class));
+    }
+
+    @Override
+    public Page<OfferResponseDto> getOffersByEnterprise(Pageable pageable, String enterpriseId) {
+        Page<Offer> offers = offerRepository.findByEnterpriseId(enterpriseId, pageable);
+        return offers.map(offer -> modelMapper.map(offer, OfferResponseDto.class));
     }
 
     @Override

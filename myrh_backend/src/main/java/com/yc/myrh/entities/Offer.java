@@ -24,10 +24,10 @@ public class Offer {
     @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
 
-    @ManyToMany
-    @JoinTable(name = "candidature",
-            joinColumns = @JoinColumn(name = "offer_id"),
-            inverseJoinColumns = @JoinColumn(name = "candidate_id"))
-    private List<Candidate> candidates;
+    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Candidature> candidatures; ;
+
+
+
 
 }
